@@ -29,9 +29,10 @@ jobs:
               run: python train.py
             - name: Install MinIO Client
               run: |
-               curl -O https://dl.min.io/client/mc/release/linux-amd64/mc
+               curl -L https://dl.min.io/client/mc/release/linux-amd64/mc -o mc
                chmod +x mc
-               sudo mv mc /usr/local/bin/
+               sudo mv mc /usr/local/bin/mc
+               mc --version
             - name: Upload Model to MinIO
               run: |
                 mc alias set local \
