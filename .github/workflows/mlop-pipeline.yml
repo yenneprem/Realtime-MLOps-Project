@@ -31,16 +31,14 @@ jobs:
             - name: Train the model
               run: python train.py
             - name: Install MinIO Client
-              shell: powershell
               run: |
-               mc --version
+               /e/DevOps-Practice/mc.exe --version
             - name: Upload Model to MinIO
-              shell: powershell
               run: |
-                mc alias set local \
+                /e/DevOps-Practice/mc.exe alias set local \
                 ${{ secrets.MINIO_ENDPOINT }} \
                 ${{ secrets.MINIO_ACCESS_KEY }} \
                 ${{ secrets.MINIO_SECRET_KEY }}
 
-                mc cp model/churn_model.pkl local/churn-model-bucket-cicd-prem/model/churn_model.pkl
+                /e/DevOps-Practice/mc.exe cp model/churn_model.pkl local/churn-model-bucket-cicd-prem/model/churn_model.pkl
 
