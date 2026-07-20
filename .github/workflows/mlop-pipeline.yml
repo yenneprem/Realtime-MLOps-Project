@@ -35,10 +35,7 @@ jobs:
                E:\DevOps-Practice\mc.exe --version
             - name: Upload Model to MinIO
               run: |
-                E:\DevOps-Practice\mc.exe alias set local \
-                ${{ secrets.MINIO_ENDPOINT }} \
-                ${{ secrets.MINIO_ACCESS_KEY }} \
-                ${{ secrets.MINIO_SECRET_KEY }}
+                E:\DevOps-Practice\mc.exe alias set local ${{ secrets.MINIO_ENDPOINT }} ${{ secrets.MINIO_ACCESS_KEY }} ${{ secrets.MINIO_SECRET_KEY }}
 
                 E:\DevOps-Practice\mc.exe cp model/churn_model.pkl local/churn-model-bucket-cicd-prem/model/churn_model.pkl
 
