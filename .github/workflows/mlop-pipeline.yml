@@ -4,7 +4,7 @@ on:
         branches:
             - cicd
 env:
-    S3_BUCKET: churn-model-bucket-cicd-prem
+    S3_BUCKET: churn-model-bucket-cicd-prem's
 jobs:
     train-deploy:
         runs-on: ubuntu-latest
