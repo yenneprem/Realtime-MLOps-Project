@@ -7,7 +7,8 @@ from sklearn.metrics import accuracy_score, roc_auc_score
 import os
 
 # Load data
-os.mkdir("models",exist_ok=True)
+#os.mkdirs("models",exist_ok=True)
+os.makedirs('models', exist_ok=True)
 df = pd.read_csv('data/churn_data.csv')
 
 # Features and target
