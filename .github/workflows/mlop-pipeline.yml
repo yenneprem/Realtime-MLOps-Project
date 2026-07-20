@@ -31,9 +31,11 @@ jobs:
             - name: Train the model
               run: python train.py
             - name: Install MinIO Client
+              shell: powershell
               run: |
                mc --version
             - name: Upload Model to MinIO
+              shell: powershell
               run: |
                 mc alias set local \
                 ${{ secrets.MINIO_ENDPOINT }} \
