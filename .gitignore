@@ -1,6 +1,9 @@
-data/
+#data/
 models/*.pkl
 *.pyc
 __pycache__/
 .dvc/cache
 .dvc/tmp
+helm.zip
+windows-amd64/
+.venv

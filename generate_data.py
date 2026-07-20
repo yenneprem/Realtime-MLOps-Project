@@ -1,12 +1,13 @@
 """Generate synthetic churn dataset"""
 import pandas as pd
 import numpy as np
+import os
 
 np.random.seed(42)
 
 # Generate 1000 samples
 n_samples = 1000
-
+os.mkdir("data")
 data = {
     'customer_id': range(1, n_samples + 1),
     'age': np.random.randint(18, 70, n_samples),
