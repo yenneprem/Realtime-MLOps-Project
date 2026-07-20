@@ -53,6 +53,8 @@ jobs:
                pytest --cov=. --cov-report=xml
             - name: sonarsource
               uses: sonarsource/sonarqube-scan-action@master
+              with:
+                skipSignatureVerification: true
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
                 SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
