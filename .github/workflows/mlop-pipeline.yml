@@ -26,6 +26,27 @@ jobs:
               run: |
                 pip install -r requirements.txt
                 pip install pytest pytest-cov
+      #       - name: Run tests with coverage
+      #         shell: powershell
+      #         run: |
+      #          pytest --cov=. --cov-report=xml
+      #       - name: sonarsource
+      #         uses: sonarsource/sonarqube-scan-action@master
+      #         env:
+      #           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # # following lines. This would typically be used to fail a deployment.
+      #       - name: gates
+      #         uses: sonarsource/sonarqube-quality-gate-action@master
+      #         timeout-minutes: 5
+      #         env:
+      #           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            - name: Generate DataSet
+              run: |
+                 python generate_data.py
+            - name: Train the model
+              run: python train.py
             - name: Run tests with coverage
               shell: powershell
               run: |
@@ -42,11 +63,6 @@ jobs:
               timeout-minutes: 5
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-            - name: Generate DataSet
-              run: |
-                 python generate_data.py
-            - name: Train the model
-              run: python train.py
             - name: Install MinIO Client
               run: |
                E:\DevOps-Practice\mc.exe --version
