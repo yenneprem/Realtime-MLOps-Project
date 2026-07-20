@@ -25,7 +25,9 @@ jobs:
             - name: install dep
               run: |
                 pip install -r requirements.txt
+                pip install pytest pytest-cov
             - name: Run tests with coverage
+              shell: powershell
               run: |
                pytest --cov=. --cov-report=xml
             - name: sonarsource
