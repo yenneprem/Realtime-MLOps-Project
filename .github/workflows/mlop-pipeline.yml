@@ -4,7 +4,7 @@ on:
         branches:
             - cicd
 env:
-    S3_BUCKET: churn-model-bucket-cicd-prem's
+    S3_BUCKET: churn-model-bucket-cicd-prem
 jobs:
     train-deploy:
         runs-on: self-hosted
