@@ -1,0 +1,43 @@
+name: MLOps pipeline
+on:
+    push:
+        branches:
+            - cicd
+env:
+    S3_BUCKET: churn-model-bucket-cicd-prem
+jobs:
+    train-deploy:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: checkout repo
+              uses: actions/checkout@v4
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+            - name: setup python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.11"
+            - name: install dep
+              run: |
+                pip install -r requirements.txt
+            - name: Generate DataSet
+              run: |
+                 python generate_data.py
+            - name: Train the model
+              run: python train.py
+            - name: Install MinIO Client
+              run: |
+               curl -O https://dl.min.io/client/mc/release/linux-amd64/mc
+               chmod +x mc
+               sudo mv mc /usr/local/bin/
+            - name: Upload Model to MinIO
+              run: |
+                mc alias set local \
+                ${{ secrets.MINIO_ENDPOINT }} \
+                ${{ secrets.MINIO_ACCESS_KEY }} \
+                ${{ secrets.MINIO_SECRET_KEY }}
+
+                mc cp model/churn_model.pkl local/churn-model-bucket-cicd-prem/model/churn_model.pkl
+
